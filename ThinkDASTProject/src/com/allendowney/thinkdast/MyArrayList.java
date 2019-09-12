@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * @author downey and april 
+ * @author downey and april
  * @param <T>
  *
  */
 public class MyArrayList<T> implements List<T> {
-	int size;                    // keeps track of the number of elements
-	private T[] array;           // stores the elements
+	int size; // keeps track of the number of elements
+	private T[] array; // stores the elements
 
 	/**
 	 *
@@ -21,7 +21,7 @@ public class MyArrayList<T> implements List<T> {
 	@SuppressWarnings("unchecked")
 	public MyArrayList() {
 		// You can't instantiate an array of T[], but you can instantiate an
-		// array of Object and then typecast it.  Details at
+		// array of Object and then typecast it. Details at
 		// http://www.ibm.com/developerworks/java/library/j-jtp01255/index.html
 		array = (T[]) new Object[10];
 		size = 0;
@@ -38,27 +38,23 @@ public class MyArrayList<T> implements List<T> {
 		mal.add(3);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
 
-		//mal.remove(new Integer(2));
-		//System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
-		
-		mal.add(0,  6);
+		mal.remove(0);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
-		System.out.println(mal.get(0));
-		
-		
+
+
 	}
 
 	@Override
 	public boolean add(T element) {
 		if (size >= array.length) {
-            // make a bigger array and copy over the elements
-            T[] bigger = (T[]) new Object[array.length * 2];
-            System.arraycopy(array, 0, bigger, 0, array.length);
-            array = bigger;
-        } 
-        array[size] = element;
-        size++;
-        return true;
+			// make a bigger array and copy over the elements
+			T[] bigger = (T[]) new Object[array.length * 2];
+			System.arraycopy(array, 0, bigger, 0, array.length);
+			array = bigger;
+		}
+		array[size] = element;
+		size++;
+		return true;
 	}
 
 	@Override
@@ -70,8 +66,8 @@ public class MyArrayList<T> implements List<T> {
 		add(element);
 
 		// shift the elements
-		for (int i=size-1; i>index; i--) {
-			array[i] = array[i-1];
+		for (int i = size - 1; i > index; i--) {
+			array[i] = array[i - 1];
 		}
 		// put the new one in the right place
 		array[index] = element;
@@ -80,7 +76,7 @@ public class MyArrayList<T> implements List<T> {
 	@Override
 	public boolean addAll(Collection<? extends T> collection) {
 		boolean flag = true;
-		for (T element: collection) {
+		for (T element : collection) {
 			flag &= add(element);
 		}
 		return flag;
@@ -105,7 +101,7 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public boolean containsAll(Collection<?> collection) {
-		for (Object element: collection) {
+		for (Object element : collection) {
 			if (!contains(element)) {
 				return false;
 			}
@@ -123,11 +119,16 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public int indexOf(Object target) {
-		// TODO: FILL THIS IN!
+		for (int i = 0; i < size; i++) {
+			if (get(i).equals(target)) {
+				return i;
+			}
+		}
 		return -1;
 	}
 
-	/** Checks whether an element of the array is the target.
+	/**
+	 * Checks whether an element of the array is the target.
 	 *
 	 * Handles the special case that the target is null.
 	 *
@@ -158,7 +159,7 @@ public class MyArrayList<T> implements List<T> {
 	@Override
 	public int lastIndexOf(Object target) {
 		// see notes on indexOf
-		for (int i = size-1; i>=0; i--) {
+		for (int i = size - 1; i >= 0; i--) {
 			if (equals(target, array[i])) {
 				return i;
 			}
@@ -194,14 +195,20 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public T remove(int index) {
-		// TODO: FILL THIS IN!
-		return null;
+		T a = get(index);
+		//Shift the element to the right
+		for (int i = index; i < size; i++) {
+			array[i] = array[i+1];
+			;
+		}
+		size--;
+		return a;
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> collection) {
 		boolean flag = true;
-		for (Object obj: collection) {
+		for (Object obj : collection) {
 			flag &= remove(obj);
 		}
 		return flag;
@@ -216,7 +223,7 @@ public class MyArrayList<T> implements List<T> {
 	public T set(int index, T element) {
 		T a = get(index);
 		array[index] = element;
-		return a ;
+		return a;
 	}
 
 	@Override
