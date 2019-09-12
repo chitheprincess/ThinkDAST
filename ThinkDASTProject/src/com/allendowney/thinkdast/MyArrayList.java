@@ -38,8 +38,10 @@ public class MyArrayList<T> implements List<T> {
 		mal.add(3);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
 
-		mal.remove(0);
+		mal.add(null);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
+		
+		System.out.println(mal.indexOf(null));
 
 
 	}
@@ -120,7 +122,7 @@ public class MyArrayList<T> implements List<T> {
 	@Override
 	public int indexOf(Object target) {
 		for (int i = 0; i < size; i++) {
-			if (get(i).equals(target)) {
+			if (equals(target, get(i))) {
 				return i;
 			}
 		}
