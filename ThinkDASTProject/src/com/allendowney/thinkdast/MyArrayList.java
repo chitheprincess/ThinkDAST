@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * @author downey
+ * @author downey and april 
  * @param <T>
  *
  */
@@ -38,14 +38,27 @@ public class MyArrayList<T> implements List<T> {
 		mal.add(3);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
 
-		mal.remove(new Integer(2));
+		//mal.remove(new Integer(2));
+		//System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
+		
+		mal.add(0,  6);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
+		System.out.println(mal.get(0));
+		
+		
 	}
 
 	@Override
 	public boolean add(T element) {
-		// TODO: FILL THIS IN!
-		return false;
+		if (size >= array.length) {
+            // make a bigger array and copy over the elements
+            T[] bigger = (T[]) new Object[array.length * 2];
+            System.arraycopy(array, 0, bigger, 0, array.length);
+            array = bigger;
+        } 
+        array[size] = element;
+        size++;
+        return true;
 	}
 
 	@Override
@@ -201,8 +214,9 @@ public class MyArrayList<T> implements List<T> {
 
 	@Override
 	public T set(int index, T element) {
-		// TODO: FILL THIS IN!
-		return null;
+		T a = get(index);
+		array[index] = element;
+		return a ;
 	}
 
 	@Override

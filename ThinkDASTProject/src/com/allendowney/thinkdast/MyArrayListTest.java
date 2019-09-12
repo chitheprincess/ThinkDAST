@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class MyArrayListTest {
 		for (int i = 4; i < 20; i++) {
 			mylist.add(i);
 		}
-		//System.out.println(Arrays.toString(mal.toArray()));
+		System.out.println("Test add T:" + Arrays.toString(mylist.toArray()));
 		assertThat(mylist.get(18), is(new Integer(19)));
 	}
 
@@ -63,7 +64,7 @@ public class MyArrayListTest {
 	@Test
 	public void testAddIntT() {
 		mylist.add(1, 5);
-		//System.out.println(Arrays.toString(mal.toArray()));
+		//System.out.println(Arrays.toString(mylist.toArray()));
 		assertThat(mylist.get(1), is(new Integer(5)));
 		assertThat(mylist.size(), is(4));
 
@@ -78,11 +79,11 @@ public class MyArrayListTest {
 		} catch (IndexOutOfBoundsException e) {} // good
 
 		mylist.add(0, 6);
-		//System.out.println(Arrays.toString(mal.toArray()));
+		//System.out.println(Arrays.toString(mylist.toArray()));
 		assertThat(mylist.get(0), is(6));
 
 		mylist.add(5, 7);
-		//System.out.println(Arrays.toString(mal.toArray()));
+		//System.out.println(Arrays.toString(mylist.toArray()));
 		assertThat(mylist.get(5), is(new Integer(7)));
 	}
 
